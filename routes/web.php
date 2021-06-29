@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,12 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::resource('publisher', PublisherController::class);
+
+Route::post('book/{book}/add-author',[BookController::class, 'addUser'])->name('book.add-author');
+Route::resource('book', BookController::class);
+
+Route::get('inicio', function() {
+    return view('inicio');
+});
