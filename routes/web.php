@@ -23,10 +23,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('publisher', PublisherController::class);
+Route::resource('publisher', PublisherController::class)->middleware('auth');
 
 Route::post('book/{book}/add-author',[BookController::class, 'addUser'])->name('book.add-author');
-Route::resource('book', BookController::class);
+Route::resource('book', BookController::class)->middleware('auth');
 
 Route::get('inicio', function() {
     return view('inicio');
