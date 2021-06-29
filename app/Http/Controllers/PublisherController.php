@@ -36,6 +36,13 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre' => 'required|min:3|max:255',
+            'telefono' => 'required|min:5|max:15',
+            'pais' => 'required|min:4|max:25',
+            'ciudad' => 'required|min:4|max:25',
+            'email' => 'required|min:10|max:255',
+        ]);
         Publisher::create($request->all());
         return redirect()->route('publisher.index');
     }
@@ -73,6 +80,13 @@ class PublisherController extends Controller
     {
         // $publisher->element = $request->element; that's the general form as an alternative to update
         // $publisher->save();
+        $request->validate([
+            'nombre' => 'required|min:3|max:255',
+            'telefono' => 'required|min:5|max:15',
+            'pais' => 'required|min:4|max:25',
+            'ciudad' => 'required|min:4|max:25',
+            'email' => 'required|min:10|max:255',
+        ]);
         Publisher::where('id',$publisher->id)->update($request->except('_token','_method'));
         return redirect()->route('publisher.show', $publisher);
     }

@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class BookController extends Controller
 {
+    private $rules;
+
+    public function __construct()
+    {
+        $this->rules = [
+            'nombre' => 'required|min:3|max:255',
+            'descripcion' => 'required|min:5|max:255',
+            'genero' => 'required|min:4|max:255',
+            'publisher_id' => 'required|exists:publishers,id',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +60,7 @@ class BookController extends Controller
         // $book->genero = $request->genero;
         // $book->publisher_id = $request->publisher_id;
         // $book->save();
-        $request->validate(['publisher_id' => 'exists:publishers,id',]);
+        $request->validate($this->rules);
         Book::create($request->all());
         return redirect()->route('book.index');
     }
@@ -85,6 +97,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $request->validate($this->rules);
         Publisher::where('id',$book->id)->update($request->except('_token','_method'));
         return redirect()->route('book.show', $book);
     }

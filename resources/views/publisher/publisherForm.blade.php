@@ -28,14 +28,17 @@
         @csrf 
 
         <label class="block text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Name</span>
+            <span class="text-gray-700 dark:text-gray-400">Nombre</span>
             <input
                 class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
                 type="text"
                 name="nombre"
                 id="nombre"
-                value="{{ $publisher->nombre ?? '' }}"
+                value="{{ old('nombre') ?? $publisher->nombre ?? '' }}"
             />
+            @error('nombre')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -45,8 +48,11 @@
                 type="text"
                 name="telefono"
                 id="telefono"
-                value="{{ $publisher->telefono ?? '' }}"
+                value="{{ old('telefono') ?? $publisher->telefono ?? '' }}"
             />
+            @error('telefono')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -56,8 +62,11 @@
                 type="text"
                 name="pais"
                 id="pais"
-                value="{{ $publisher->pais ?? '' }}"
+                value="{{ old('pais') ?? $publisher->pais ?? '' }}"
             />
+            @error('pais')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -67,8 +76,11 @@
                 type="text"
                 name="ciudad"
                 id="ciudad"
-                value="{{ $publisher->ciudad ?? '' }}"
+                value="{{ old('ciudad') ?? $publisher->ciudad ?? '' }}"
             />
+            @error('ciudad')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -78,8 +90,11 @@
                 type="text"
                 name="email"
                 id="email"
-                value="{{ $publisher->email ?? '' }}"
+                value="{{ old('email') ?? $publisher->email ?? '' }}"
             />
+            @error('email')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <div class="mt-4">

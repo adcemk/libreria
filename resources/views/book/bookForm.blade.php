@@ -5,16 +5,6 @@
         Formulario de Libro
     </h2>
 
-    @if ($errors->any())
-        <div class="alert alert-danger px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
-            <ul class="inline-flex items-center">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <div>
     </div>
 
@@ -44,8 +34,11 @@
                 type="text"
                 name="nombre"
                 id="nombre"
-                value="{{ $book->nombre ?? '' }}"
+                value="{{ old('nombre') ?? $book->nombre ?? '' }}"
             />
+            @error('nombre')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -55,8 +48,11 @@
                 type="text"
                 name="descripcion"
                 id="descripcion"
-                value="{{ $book->descripcion ?? '' }}"
+                value="{{ old('descripcion') ?? $book->descripcion ?? '' }}"
             />
+            @error('descripcion')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -66,8 +62,11 @@
                 type="text"
                 name="genero"
                 id="genero"
-                value="{{ $book->genero ?? '' }}"
+                value="{{ old('genero') ?? $book->genero ?? '' }}"
             />
+            @error('genero')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <label class="block text-sm">
@@ -77,8 +76,11 @@
                 type="number"
                 name="publisher_id"
                 id="publisher_id"
-                value="{{ $book->publisher_id ?? '' }}"
+                value="{{ old('publisher_id') ?? $book->publisher_id ?? '' }}"
             />
+            @error('publisher_id')
+                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
+            @enderror
         </label>
 
         <div class="mt-4">
