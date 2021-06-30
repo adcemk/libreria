@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publisher;
 use App\Models\User;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -27,11 +28,6 @@ class BookController extends Controller
      */
     public function index()
     {
-        // $books = DB::table('books')
-        // ->join('publishers', 'publishers.id', '=', 'books.publisher_id')
-        // ->select('books.*', 'publishers.nombre AS publisher_nombre')
-        // ->get();
-        // dd($books);
         $books = Book::all();
         return view('book.bookIndex', compact('books'));
     }
@@ -43,7 +39,9 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('book.bookForm');
+        $publishers = Publisher::get();
+        return view('book.bookForm', compact('publishers'));
+        //return view('book.bookForm');
     }
 
     /**
@@ -54,12 +52,6 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // $book = new Book();
-        // $book->nombre = $request->nombre;
-        // $book->descripcion = $request->descripcion;
-        // $book->genero = $request->genero;
-        // $book->publisher_id = $request->publisher_id;
-        // $book->save();
         $request->validate($this->rules);
         Book::create($request->all());
         return redirect()->route('book.index');
@@ -85,7 +77,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('book.bookForm', compact('book'));
+        $publishers = Publisher::get();
+        return view('book.bookForm', compact('book','publishers'));
     }
 
     /**
