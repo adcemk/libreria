@@ -79,7 +79,7 @@
                     id="publisher_id" 
             >
                 @foreach ($publishers as $publisher)
-                    <option value="{{ $publisher->id }}" {{ old('publisher_id') == $publisher->id ? 'selected' : '' }} ">{{ $publisher->nombre }}</option>
+                    <option value="{{ $publisher->id }}">{{ $publisher->nombre }}</option>
                 @endforeach
             </select>
         </label>
