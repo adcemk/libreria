@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PublisherController extends Controller
 {
@@ -41,7 +42,7 @@ class PublisherController extends Controller
             'telefono' => 'required|min:5|max:15',
             'pais' => 'required|min:4|max:25',
             'ciudad' => 'required|min:4|max:25',
-            'email' => 'required|min:10|max:255',
+            'email' => 'required|min:10|max:255|unique:publishers,email',
         ]);
         Publisher::create($request->all());
         return redirect()->route('publisher.index');
@@ -81,11 +82,11 @@ class PublisherController extends Controller
         // $publisher->element = $request->element; that's the general form as an alternative to update
         // $publisher->save();
         $request->validate([
-            'nombre' => 'required|min:3|max:255',
-            'telefono' => 'required|min:5|max:15',
-            'pais' => 'required|min:4|max:25',
-            'ciudad' => 'required|min:4|max:25',
-            'email' => 'required|min:10|max:255',
+            'nombre' => ['required','min:3','max:255'],
+            'telefono' => ['required','min:5','max:15'],
+            'pais' => ['required','min:4','max:25'],
+            'ciudad' => ['required','min:4','max:25'],
+            'email' => ['required','min:10','max:255',Rule::unique('publishers')->ignore($publisher->id)],
         ]);
         Publisher::where('id',$publisher->id)->update($request->except('_token','_method'));
         return redirect()->route('publisher.show', $publisher);

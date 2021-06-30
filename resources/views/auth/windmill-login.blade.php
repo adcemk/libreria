@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Forgot password - Windmill Dashboard</title>
+    <title>Libreria</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -26,13 +26,13 @@
             <img
               aria-hidden="true"
               class="object-cover w-full h-full dark:hidden"
-              src="{{ asset('img/forgot-password-office.jpeg') }}"
+              src="{{ asset('img/login-office.jpeg') }}"
               alt="Office"
             />
             <img
               aria-hidden="true"
               class="hidden object-cover w-full h-full dark:block"
-              src="{{ asset('img/forgot-password-office-dark.jpeg') }}"
+              src="{{ asset('img/login-office-dark.jpeg') }}"
               alt="Office"
             />
           </div>
@@ -41,17 +41,33 @@
               <h1
                 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200"
               >
-                Forgot password
+                {{ __('Log in') }}
               </h1>
+
               @include('partials.form-error')
-            <form method="POST" action="{{ route('password.email') }}">
+
+            <form method="POST" action="{{ route('login') }}">
                 @csrf
+
               <label class="block text-sm">
                 <span class="text-gray-700 dark:text-gray-400">{{ __('Email') }}</span>
                 <input
+                  type="email"
                   class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="JaneDoe@example.com"
+                  id="email"
                   name="email"
-                  value="{{ old('email') }}" 
+                  value="{{ old('email') }}"
+                />
+              </label>
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">{{ __('Password') }}</span>
+                <input
+                  type="password"
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="***************"
+                  id="password"
+                  name="password"
                 />
               </label>
 
@@ -59,9 +75,27 @@
               <button
                 class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
               >
-                {{ __('Email Password Reset Link') }}
+                {{ __('Log in') }}    
               </button>
             </form>
+              <hr class="my-8" />
+
+              <p class="mt-4">
+                <a
+                  class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                  href="{{ route('password.request') }}"
+                >
+                    {{ __('Forgot your password?') }}
+                </a>
+              </p>
+              <p class="mt-1">
+                <a
+                  class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                  href="{{ route('register') }}"
+                >
+                  Crear Cuenta
+                </a>
+              </p>
             </div>
           </div>
         </div>
@@ -69,40 +103,3 @@
     </div>
   </body>
 </html>
-
-
-
-{{-- <x-guest-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-        </div>
-
-        @if (session('status'))
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ session('status') }}
-            </div>
-        @endif
-
-        <x-jet-validation-errors class="mb-4" />
-
-        <form method="POST" action="{{ route('password.email') }}">
-            @csrf
-
-            <div class="block">
-                <x-jet-label for="email" value="{{ __('Email') }}" />
-                <x-jet-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <x-jet-button>
-                    {{ __('Email Password Reset Link') }}
-                </x-jet-button>
-            </div>
-        </form>
-    </x-jet-authentication-card>
-</x-guest-layout> --}}
