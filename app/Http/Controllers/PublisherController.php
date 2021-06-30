@@ -26,6 +26,8 @@ class PublisherController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');
+
         return view('publisher.publisherForm');
     }
 
@@ -56,6 +58,8 @@ class PublisherController extends Controller
      */
     public function show(Publisher $publisher)
     {
+        $this->authorize('view');
+        
         return view('publisher.publisherShow', compact('publisher'));
     }
 
@@ -79,6 +83,10 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
+        if( $request->user()->cannot('update', $publisher )){
+            abort(403);
+        }
+
         // $publisher->element = $request->element; that's the general form as an alternative to update
         // $publisher->save();
         $request->validate([

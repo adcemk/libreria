@@ -6,6 +6,8 @@ use App\Models\Book;
 use App\Models\User;
 use App\Models\Team;
 use App\Policies\TeamPolicy;
+use App\Policies\PublisherPolicy;
+use App\Policies\BookPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -18,6 +20,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Team::class => TeamPolicy::class,
+        Publisher::class => PublisherPolicy::class,
+        Book::class => BookPolicy::class,
     ];
 
     /**

@@ -18,14 +18,14 @@ class UsersSeeder extends Seeder
             'name' => 'administrador',
             'email' => 'administrador@test.com',
             'type' => 'Administrador',
-            'password' => '12345678',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
         ]);
 
         DB::table('users')->insert([
             'name' => 'usuario',
             'email' => 'usuario@test.com',
             'type' => 'Usuario',
-            'password' => '12345678',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
         ]);
     }
 }
