@@ -84,20 +84,6 @@
             </select>
         </label>
 
-        {{-- <label class="block text-sm">
-            <span class="text-gray-700 dark:text-gray-400">Id de Publicador</span>
-            <input
-                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                type="number"b
-                name="publisher_id"
-                id="publisher_id"
-                value="{{ old('publisher_id') ?? $book->publisher_id ?? '' }}"
-            />
-            @error('publisher_id')
-                <span class="text-xs text-red-600 datk:text-red-400">{{ $message }}</span>
-            @enderror
-        </label> --}}
-
         <div class="mt-4">
             <button class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
                 type="submit"

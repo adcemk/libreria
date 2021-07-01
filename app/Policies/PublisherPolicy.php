@@ -65,7 +65,7 @@ class PublisherPolicy
      */
     public function delete(User $user, Publisher $publisher)
     {
-        //
+        return !($publisher->books()->exists());
     }
 
     /**

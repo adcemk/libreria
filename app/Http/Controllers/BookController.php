@@ -84,7 +84,7 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         Gate::authorize('admin-book');
-
+        
         $publishers = Publisher::get();
         return view('book.bookForm', compact('book','publishers'));
     }
@@ -99,9 +99,8 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         Gate::authorize('admin-book');
-
         $request->validate($this->rules);
-        Publisher::where('id',$book->id)->update($request->except('_token','_method'));
+        Book::where('id',$book->id)->update($request->except('_token','_method'));
         return redirect()->route('book.show', $book);
     }
 

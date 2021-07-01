@@ -1,10 +1,6 @@
 @extends('layouts.windmill')
 @section('contenido')
 
-    <h4 class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
-        Detalle de Publicador
-    </h4>
-
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Detalle de Publicador
     </h2>
@@ -35,7 +31,7 @@
         </p>
         </div>
     </div>
-
+@can('delete', $publisher)
     <!-- Eliminacion de Publisher-->
     <form action="{{ route('publisher.destroy', $publisher) }}" method="POST">
         @csrf
@@ -52,4 +48,5 @@
             </button>
         </div>
     </form>
+@endcan
 @endsection

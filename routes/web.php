@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ArchivoController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -49,3 +50,6 @@ Route::resource('publisher', PublisherController::class)->middleware('auth');
 
 Route::post('book/{book}/add-author',[BookController::class, 'addUser'])->name('book.add-author');
 Route::resource('book', BookController::class)->middleware('auth');
+
+Route::get('archivo/download/{archivo}', [ArchivoController::class, 'descargar'])->name('archivo.descargar');
+Route::resource('archivo', ArchivoController::class)->except(['edit', 'update', 'show']);

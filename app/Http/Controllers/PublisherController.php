@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class PublisherController extends Controller
 {
@@ -26,7 +27,8 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        $this->authorize('create');
+        //$this->authorize('create');
+        Gate::authorize('admin-book');
 
         return view('publisher.publisherForm');
     }
@@ -39,6 +41,8 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('admin-book');
+
         $request->validate([
             'nombre' => 'required|min:3|max:255',
             'telefono' => 'required|min:5|max:15',
@@ -58,7 +62,7 @@ class PublisherController extends Controller
      */
     public function show(Publisher $publisher)
     {
-        $this->authorize('view');
+        //$this->authorize('view');
         
         return view('publisher.publisherShow', compact('publisher'));
     }
@@ -71,6 +75,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
+        Gate::authorize('admin-book');
         return view('publisher.publisherForm', compact('publisher'));
     }
 
@@ -83,9 +88,10 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        if( $request->user()->cannot('update', $publisher )){
-            abort(403);
-        }
+        // if( $request->user()->cannot('update', $publisher )){
+        //     abort(403);
+        // }
+        Gate::authorize('admin-book');
 
         // $publisher->element = $request->element; that's the general form as an alternative to update
         // $publisher->save();
@@ -108,6 +114,7 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
+        Gate::authorize('admin-book');
         $publisher->delete();
         return redirect()->route('publisher.index');
     }
